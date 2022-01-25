@@ -25,3 +25,30 @@
 #container a {
   text-decoration: none;
 }
+
+ion-list {
+  padding: 0;
+}
+
+ion-title img {
+  max-height: 30px;
+  margin-top: 4px;
+}
+
+ion-item {
+  margin-bottom: 2px;
+  --inner-padding-end: 0px;
+  --padding-start: 0px;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+}
+
+ion-badge {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
