@@ -1,0 +1,6 @@
+{
+	"appId": "com.certifyyaself.snapaday",
+	"appName": "snapaday",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
