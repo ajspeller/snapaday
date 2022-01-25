@@ -15,6 +15,7 @@ import { Photo } from '../interfaces/photo';
 
 import { SimpleAlertService } from '../services/simple-alert.service';
 import { PhotoService } from '../services/photo.service';
+import { SlideshowPage } from '../slideshow/slideshow.page';
 
 @Component({
   selector: 'app-home',
@@ -85,7 +86,19 @@ export class HomePage implements OnInit {
     }
   }
 
-  async playSlideshow(): Promise<void> {}
+  async playSlideshow(): Promise<void> {
+    if (this.photos.length < 2) {
+      const modal = await this.modalController.create({
+        component: SlideshowPage,
+      });
+      modal.present();
+    } else {
+      this.simpleAlertService.showAlert(
+        'Oops!',
+        'You need at least 2 photos before you can play a slideshow'
+      );
+    }
+  }
 
   async deletePhoto(photo: Photo): Promise<void> {
     await this.slidingList.closeSlidingItems();

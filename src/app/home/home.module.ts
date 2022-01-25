@@ -13,6 +13,6 @@ import { DaysAgoPipe } from '../pipes/days-ago.pipe';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, HomePageRoutingModule],
-  declarations: [HomePage, SlideshowPage],
+  declarations: [HomePage, SlideshowPage, DaysAgoPipe],
 })
 export class HomePageModule {}

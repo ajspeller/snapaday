@@ -25,7 +25,7 @@
     <ion-item-sliding *ngFor="let photo of photos">
       <ion-item>
         <img [src]="sanitizer.bypassSecurityTrustResourceUrl(photo.path)" />
-        <ion-badge color="light" slot="end">0 days ago</ion-badge>
+        <ion-badge color="light" slot="end">{{ photo.dateTaken }}days ago</ion-badge>
       </ion-item>
       <ion-item-options>
         <ion-item-option color="danger" (click)="deletePhoto(photo)">

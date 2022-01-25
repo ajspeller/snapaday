@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { DaysAgoPipe } from './pipes/days-ago.pipe';
 
 @NgModule({
-  declarations: [AppComponent, DaysAgoPipe],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
