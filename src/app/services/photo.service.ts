@@ -34,34 +34,43 @@ export class PhotoService {
   constructor(private storage: Storage, private platform: Platform) {}
 
   async load(): Promise<void> {
+    if (!this.loaded) {
+      const photos = await this.storage.get('photos');
+      if (photos !== null) {
+        this.photos = photos;
+      }
+    }
+
     // test data
-    this.photos = [
-      {
-        name: 'test',
-        path: 'http://placehold.it/100x100',
-        dateTaken: new Date(2018, 5, 5),
-      },
-      {
-        name: 'test',
-        path: 'http://placehold.it/100x100',
-        dateTaken: new Date(2018, 5, 6),
-      },
-      {
-        name: 'test',
-        path: 'http://placehold.it/100x100',
-        dateTaken: new Date(2018, 5, 8),
-      },
-      {
-        name: 'test',
-        path: 'http://placehold.it/100x100',
-        dateTaken: new Date(2018, 5, 10),
-      },
-    ];
+    // this.photos = [
+    //   {
+    //     name: 'test',
+    //     path: 'http://placehold.it/100x100',
+    //     dateTaken: new Date(2018, 5, 5),
+    //   },
+    //   {
+    //     name: 'test',
+    //     path: 'http://placehold.it/100x100',
+    //     dateTaken: new Date(2018, 5, 6),
+    //   },
+    //   {
+    //     name: 'test',
+    //     path: 'http://placehold.it/100x100',
+    //     dateTaken: new Date(2018, 5, 8),
+    //   },
+    //   {
+    //     name: 'test',
+    //     path: 'http://placehold.it/100x100',
+    //     dateTaken: new Date(2018, 5, 10),
+    //   },
+    // ];
 
     this.checkIfPhotoAlreadyTakenToday();
     this.photos$.next(this.photos);
 
     this.addPhotoTakenListener();
+
+    this.loaded = true;
   }
 
   getPhotos(): Observable<SnapadayPhoto[]> {
@@ -163,6 +172,6 @@ export class PhotoService {
 
   save(): Promise<void> {
     this.photos$.next(this.photos);
-    return Promise.resolve();
+    return this.storage.set('photos', this.photos);
   }
 }
