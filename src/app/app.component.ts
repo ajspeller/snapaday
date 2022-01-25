@@ -23,5 +23,20 @@ export class AppComponent {
     StatusBar.setBackgroundColor({ color: '#eb445a' }).catch((err) =>
       console.warn(err)
     );
+    const pendingNotifications = await LocalNotifications.getPending();
+    if (pendingNotifications.notifications.length === 0) {
+      const firstNotificationTime = new Date();
+      firstNotificationTime.setHours(firstNotificationTime.getHours() + 24);
+      LocalNotifications.schedule({
+        notifications: [
+          {
+            id: 1,
+            title: 'Snapaday',
+            body: 'Have you taken your snap today',
+            schedule: { at: firstNotificationTime, every: 'day' },
+          },
+        ],
+      });
+    }
   }
 }
